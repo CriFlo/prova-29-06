@@ -12,6 +12,10 @@ docker run --rm \
     laravelsail/php83-composer:latest \
     composer install --ignore-platform-reqs
 ```
+# Avviare il container
+```bash
+./vendor/bin/sail up
+```
 
 # Generare la chiave
 ```bash
@@ -21,4 +25,9 @@ docker run --rm \
 # Migrate il database e seedarlo
 ```bash
 ./vendor/bin/sail artisan migrate --seed
+```
+
+# Generare chiave per API
+```bash
+./vendor/bin/sail artisan app:generate_api_key
 ```
