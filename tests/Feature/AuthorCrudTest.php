@@ -80,7 +80,7 @@ class AuthorCrudTest extends TestCase
             'x-api-key' => config('app.api.api_key'),
         ]);
 
-        $response->assertStatus(200);
+        $this->assertEquals('Author Firstname Updated', $author->fresh()->firstname);
     }
 
     #[Test]

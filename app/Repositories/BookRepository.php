@@ -41,7 +41,12 @@ class BookRepository implements BookRepositoryInterface
 
         try {
             $book = Book::find($id);
-            $book->update($request->all());
+            $book->update($request->only('title', 'description'));
+
+            if ($request->has('authors')) {
+                $book->authors()->sync($request->authors);
+            }
+
             DB::commit();
 
             return $book;

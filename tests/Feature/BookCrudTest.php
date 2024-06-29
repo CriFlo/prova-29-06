@@ -90,7 +90,7 @@ class BookCrudTest extends TestCase
             'x-api-key' => config('app.api.api_key'),
         ]);
 
-        $response->assertStatus(200);
+        $this->assertEquals('Book Title Updated', $book->fresh()->title);
     }
 
     #[Test]

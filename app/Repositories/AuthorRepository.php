@@ -19,7 +19,12 @@ class AuthorRepository implements AuthorRepositoryInterface
         DB::beginTransaction();
         
         try {
-            $author = Author::create($request->all());
+            $author = Author::create($request->only('firstname', 'lastname'));
+
+            if ($request->has('books')) {
+                $author->books()->attach($request->books);
+            }
+
             DB::commit();
 
             return $author;
@@ -41,7 +46,12 @@ class AuthorRepository implements AuthorRepositoryInterface
 
         try {
             $author = Author::find($id);
-            $author->update($request->all());
+            $author->update($request->only('firstname', 'lastname'));
+
+            if ($request->has('books')) {
+                $author->books()->sync($request->books);
+            }
+            
             DB::commit();
 
             return $author;
